@@ -1,0 +1,22 @@
+---
+- name: Copying server information file to the temporary directory
+  template:
+    src: "server_information.j2"
+    dest: "/tmp/server_information"
+
+- include: cpu_information.yml
+
+- include: install.yml
+
+- include: benchmark.yml
+
+- name: Fetching to the source host
+  fetch: 
+    src: "/tmp/server_information"
+    dest: "/tmp/server_information/{{ ansible_hostname }}"
+    flat: yes
+
+- name: Removing temporary server information file
+  file:
+    state: absent
+    path: /tmp/server_information

@@ -1,0 +1,23 @@
+---
+- name: Disk write speed testing
+  shell: |
+    echo "" >> /tmp/server_information
+    echo "[*] DISK WRITE SPEED TESTING:" >> /tmp/server_information
+    dd if=/dev/zero of=/tmp/disk_speed_test bs=1M count=1024 2>> /tmp/server_information
+
+- name: Disk read speed testing
+  shell: |
+    echo "" >> /tmp/server_information
+    echo "[*] DISK READ SPEED TESTING:" >> /tmp/server_information
+    hdparm -tT /dev/vdb | sed 1d >> /tmp/server_information
+
+- name: CPU speed testing
+  shell: |
+    echo "" >> /tmp/server_information
+    echo "[*] CPU SPEED TESTING:" >> /tmp/server_information
+    sysbench --test=cpu --num-threads={{ ansible_processor_vcpus }} --cpu-max-prime=9999 run >> /tmp/server_information
+
+- name: Removing temporary speed testing file
+  file:
+    state: absent
+    path: /tmp/disk_speed_test

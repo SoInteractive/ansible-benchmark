@@ -1,0 +1,10 @@
+---
+- name: hdparm installing
+  package:
+    name: hdparm
+    state: latest
+
+- name: sysbench installing
+  package:
+    name: sysbench
+    state: latest

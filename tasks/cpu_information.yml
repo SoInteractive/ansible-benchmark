@@ -1,0 +1,8 @@
+---
+- name: Getting CPU information
+  shell: |
+    echo "" >> /tmp/server_information
+    echo "[*] CPU INFORMATIONS:" >> /tmp/server_information
+    lscpu | grep "Vendor ID" >> /tmp/server_information
+    lscpu | grep "Model name" >> /tmp/server_information
+    lscpu | grep "CPU MHz" >> /tmp/server_information

@@ -1,0 +1,10 @@
+Disitrbution name: {{ ansible_lsb.id }}
+Distribution version: {{ ansible_lsb.release }}
+Device size: {{ ansible_devices.vdb.size }}
+Rotational: {{ ansible_devices.vdb.rotational }}
+Memory size [MB]: {{ ansible_memory_mb.real.total }}
+Number of processors: {{ ansible_processor_vcpus }}
+Name servers:
+{% for item in ansible_dns.nameservers -%}
+- {{ item }}
+{%- endfor %}
