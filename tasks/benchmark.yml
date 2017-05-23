@@ -13,6 +13,7 @@
 - name: Disk write speed testing (diagnostics running)
   shell: "echo {{ item.device }}: >> /tmp/server_information; dd if=/dev/zero of={{ item.mount }}/disk_speed_test bs=1M count=1024 2>> /tmp/server_information"
   with_items: "{{ ansible_mounts }}"
+  ignore_errors: yes
 
 - name: Disk read speed testing (file header)
   shell: |
