@@ -1,10 +1,12 @@
 Disitrbution name: {{ ansible_lsb.id }}
 Distribution version: {{ ansible_lsb.release }}
-Device size: {{ ansible_devices.vdb.size }}
-Rotational: {{ ansible_devices.vdb.rotational }}
+Devices size:
+{% for item in ansible_devices %}
+- "{{ item }}": {{ ansible_devices[item].size }} [MB] (is rotational: {{ ansible_devices[item].rotational }})
+{% endfor %}
 Memory size [MB]: {{ ansible_memory_mb.real.total }}
 Number of processors: {{ ansible_processor_vcpus }}
 Name servers:
-{% for item in ansible_dns.nameservers -%}
-- {{ item }}
-{%- endfor %}
+{% for item in ansible_dns.nameservers %}
+- "{{ item }}"
+{% endfor %}

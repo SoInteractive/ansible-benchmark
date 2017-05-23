@@ -1,23 +1,36 @@
 ---
-- name: Disk write speed testing
-  shell: |
-    echo "" >> /tmp/server_information
-    echo "[*] DISK WRITE SPEED TESTING:" >> /tmp/server_information
-    dd if=/dev/zero of=/tmp/disk_speed_test bs=1M count=1024 2>> /tmp/server_information
-
-- name: Disk read speed testing
-  shell: |
-    echo "" >> /tmp/server_information
-    echo "[*] DISK READ SPEED TESTING:" >> /tmp/server_information
-    hdparm -tT /dev/vdb | sed 1d >> /tmp/server_information
-
 - name: CPU speed testing
   shell: |
     echo "" >> /tmp/server_information
     echo "[*] CPU SPEED TESTING:" >> /tmp/server_information
     sysbench --test=cpu --num-threads={{ ansible_processor_vcpus }} --cpu-max-prime=9999 run >> /tmp/server_information
 
-- name: Removing temporary speed testing file
+- name: Disk write speed testing (file header)
+  shell: |
+    echo "" >> /tmp/server_information
+    echo "[*] DISK WRITE SPEED TESTING:" >> /tmp/server_information
+
+- name: Disk write speed testing (diagnostics running)
+  shell: "echo {{ item.device }}: >> /tmp/server_information; dd if=/dev/zero of={{ item.mount }}/disk_speed_test bs=1M count=1024 2>> /tmp/server_information"
+  with_items: "{{ ansible_mounts }}"
+
+- name: Disk read speed testing (file header)
+  shell: |
+    echo "" >> /tmp/server_information
+    echo "[*] DISK READ SPEED TESTING:" >> /tmp/server_information 
+
+- name: Disk read speed testing (diagnostics running)
+  shell: "hdparm -tT /dev/{{ item }} | sed 1d >> /tmp/server_information"
+  with_items: "{{ ansible_devices }}"
+
+- name: Download speed testing
+  shell: |
+    echo "" >> /tmp/server_information
+    echo "[*] DOWNLOAD SPEED TESTING:" >> /tmp/server_information
+    wget -O /dev/null google.com 2>> /tmp/server_information
+
+- name: Removing temporary speed testing files
   file:
     state: absent
-    path: /tmp/disk_speed_test
+    path: "{{ item.mount }}/disk_speed_test"
+  with_items: "{{ ansible_mounts }}"

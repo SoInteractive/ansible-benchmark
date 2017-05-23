@@ -22,5 +22,5 @@ Use it in a playbook as follows, assuming you already have docker setup:
   become: yes
   gather_facts: True
   roles:
-    - check_server
+    - check-server
 ```
