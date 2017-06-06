@@ -6,3 +6,5 @@
     lscpu | grep "Vendor ID" >> /tmp/server_information
     lscpu | grep "Model name" >> /tmp/server_information
     lscpu | grep "CPU MHz" >> /tmp/server_information
+  args:
+    creates: /tmp/server_information

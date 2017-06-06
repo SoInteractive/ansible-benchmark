@@ -1,0 +1,23 @@
+---
+ansible:
+  playbook: tests/playbook.yml
+driver:
+  name: docker
+verifier:
+  name: testinfra
+docker:
+  containers:
+    - name: check-server-xenial
+      image: ubuntu
+      image_version: xenial
+#    - name: check-server-centos
+#      image: centos
+#      image_version: latest
+molecule:
+  test:
+    sequence:
+      - destroy
+      - syntax
+      - create
+      - converge
+      - verify

@@ -1,0 +1,19 @@
+---
+galaxy_info:
+  author: Bartlomiej Korpala
+  description: Check server parameters
+  company: Sointeractive
+  license: MIT
+  min_ansible_version: 2.0
+  platforms:
+  - name: Ubuntu
+    versions:
+    - xenial
+  - name: EL
+    versions:
+    - 7
+  galaxy_tags:
+  - check-server
+  - benchmark
+
+dependencies: []
