@@ -5,7 +5,7 @@ pipeline {
   agent {
     node {
       label 'master'
-      customWorkspace 'workspace/check-server'
+      customWorkspace 'workspace/benchmark'
     }
   }
   options {
