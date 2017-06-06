@@ -25,3 +25,11 @@ Use it in a playbook as follows:
 
 Have a look at the [defaults/main.yml](defaults/main.yml) for role variables
 that can be overridden.
+
+TODO
+----
+
+- cleanup
+- cleaner result file
+- idempotency tests (add to Jenkinsfile, remove custom test from molecule.yml)
+- tests
