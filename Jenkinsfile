@@ -35,7 +35,6 @@ pipeline {
     }
     stage('Run Tests'){
       steps {
-        sh 'molecule idempotence'
         sh 'molecule verify'
       }
     }
