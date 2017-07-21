@@ -11,4 +11,4 @@
 
 - hosts: all
   roles:
-    - check-server
+    - benchmark
