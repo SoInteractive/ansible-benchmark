@@ -7,10 +7,10 @@ verifier:
   name: testinfra
 docker:
   containers:
-    - name: check-server-xenial
+    - name: benchmark-xenial
       image: ubuntu
       image_version: xenial
-#    - name: check-server-centos
+#    - name: benchmark-centos
 #      image: centos
 #      image_version: latest
 molecule:
