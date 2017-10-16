@@ -29,4 +29,3 @@
     state: absent
     path: /tmp/server_information
   changed_when: false
-  
