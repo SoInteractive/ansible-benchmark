@@ -12,6 +12,7 @@
   template:
     src: "server_information.j2"
     dest: "/tmp/server_information"
+  changed_when: false
 
 - include: cpu_information.yml
 
@@ -27,3 +28,4 @@
   file:
     state: absent
     path: /tmp/server_information
+  changed_when: false
