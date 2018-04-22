@@ -7,6 +7,10 @@ Ansible Role: benchmark
 
 Role copies all information about the server to the file which is copied to your computer. At the beginning there are collecting information about CPU and then role checks is there need to install necessary software. Next it checks write and read speed of your disk drive and at the end CPU speed.
 
+# :warning: IMPORTANT NOTICE
+
+THIS PROJECT IS ABANDONED. WE DO NOT ACCEPT ANY NEW ISSUES AND/OR PULL REQUESTS.
+
 Disclaimer
 ----------
 
